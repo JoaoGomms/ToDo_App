@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ToDo App</string>
+    <string name="create_your_first_to_do">Create your first To Do</string>
 </resources>
