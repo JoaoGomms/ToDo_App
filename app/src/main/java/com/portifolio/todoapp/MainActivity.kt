@@ -1,5 +1,6 @@
 package com.portifolio.todoapp
 
+import android.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -25,8 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        val actionBar = supportActionBar!!
 
-        setupActionBarWithNavController(navController)
+        actionBar.elevation = 0.0f
+
+            setupActionBarWithNavController(navController)
 
     }
 
