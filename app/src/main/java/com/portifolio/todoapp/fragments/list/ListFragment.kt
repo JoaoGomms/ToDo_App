@@ -21,20 +21,26 @@ class ListFragment : Fragment() {
     ): View? {
 
         _binding = FragmentListBinding.inflate(layoutInflater)
+        handleClicks()
 
-        binding.floatingActionButton.setOnClickListener{
-
-            val action = ListFragmentDirections.actionListFragmentToAddFragment()
-
-            findNavController().navigate(action)
-
-        }
 
         return binding.root
     }
 
 
+    private fun handleClicks(){
 
+        binding.floatingActionButton.setOnClickListener{
+            val action = ListFragmentDirections.actionListFragmentToAddFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.listLayoutFragment.setOnClickListener{
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment()
+            findNavController().navigate(action)
+        }
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()
