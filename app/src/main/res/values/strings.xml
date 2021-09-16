@@ -3,6 +3,11 @@
     <string name="create_your_first_to_do">Create your first To Do</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="search">Search</string>
+    <string name="sort_by">Sort By</string>
+    <string name="priority_high">Priority High</string>
+    <string name="priority_low">Priority Low</string>
+    <string name="delete_all">Delete All</string>
 
     <string-array name="priority_array">
         <item>High</item>
