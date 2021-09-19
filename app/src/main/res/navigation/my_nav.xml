@@ -50,5 +50,8 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
+        <argument
+            android:name="currentTodo"
+            app:argType="com.portifolio.todoapp.data.model.TodoEntity" />
     </fragment>
 </navigation>
