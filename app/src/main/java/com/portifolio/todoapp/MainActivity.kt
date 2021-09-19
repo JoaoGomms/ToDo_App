@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val actionBar = supportActionBar!!
 
-        actionBar.elevation = 0.0f
+        actionBar.elevation = 2.0f
 
             setupActionBarWithNavController(navController)
 
