@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.portifolio.todoapp.R
-import com.portifolio.todoapp.adapter.TodoAdapter
+import com.portifolio.todoapp.fragments.list.adapter.TodoAdapter
 import com.portifolio.todoapp.databinding.FragmentListBinding
 import com.portifolio.todoapp.viewmodel.TodoViewModel
 

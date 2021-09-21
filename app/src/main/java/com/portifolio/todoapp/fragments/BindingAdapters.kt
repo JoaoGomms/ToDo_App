@@ -2,11 +2,15 @@ package com.portifolio.todoapp.fragments
 
 import android.view.View
 import android.widget.Spinner
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.portifolio.todoapp.R
 import com.portifolio.todoapp.data.model.Priority
+import com.portifolio.todoapp.data.model.TodoEntity
 import com.portifolio.todoapp.fragments.list.ListFragmentDirections
 
 class BindingAdapters {
@@ -20,6 +24,17 @@ class BindingAdapters {
                     val action = ListFragmentDirections.actionListFragmentToAddFragment()
                     view.findNavController().navigate(action)
                 }
+            }
+        }
+
+        @BindingAdapter("android:sendDataToUpdateFragmentr")
+        @JvmStatic
+        fun sendDataToUpdateFragmentr(view: ConstraintLayout, currentItem: TodoEntity){
+            view.setOnClickListener{
+
+                    val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+                    view.findNavController().navigate(action)
+
             }
         }
 
@@ -44,6 +59,18 @@ class BindingAdapters {
                 }
 
         }
+
+        @BindingAdapter("android:parsePriorityToColor")
+        @JvmStatic
+        fun parsePriorityToColor(cardView: CardView, priority: Priority){
+            when(priority) {
+                Priority.HIGH -> cardView.setCardBackgroundColor(ContextCompat.getColor(cardView.context, R.color.red))
+                Priority.MEDIUM -> cardView.setCardBackgroundColor(ContextCompat.getColor(cardView.context, R.color.yellow))
+                Priority.LOW -> cardView.setCardBackgroundColor(ContextCompat.getColor(cardView.context, R.color.green))
+            }
+        }
+
+
 
     }
 
