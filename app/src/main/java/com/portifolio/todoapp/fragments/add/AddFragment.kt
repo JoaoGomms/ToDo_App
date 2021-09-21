@@ -56,7 +56,7 @@ class AddFragment : Fragment() {
        val validation = sharedViewModel.verifyDataFromTodo(title, description)
 
         if (validation){
-            val newData = TodoEntity(0, title, sharedViewModel.parsePriority(priority), description)
+            val newData = TodoEntity(0, title, sharedViewModel.parseStringToPriority(priority), description)
 
             todoViewModel.insertTodo(newData)
 
