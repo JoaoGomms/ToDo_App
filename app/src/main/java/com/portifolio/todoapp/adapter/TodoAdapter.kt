@@ -30,12 +30,12 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
 
         when(currentItem.priority) {
-            Priority.HIGH -> holder.binding.proprityIndicator.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
-            Priority.MEDIUM -> holder.binding.proprityIndicator.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.yellow))
-            Priority.LOW -> holder.binding.proprityIndicator.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+            Priority.HIGH -> holder.binding.proprityIndicator.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.red))
+            Priority.MEDIUM -> holder.binding.proprityIndicator.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.yellow))
+            Priority.LOW -> holder.binding.proprityIndicator.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
         }
 
-        holder.binding.listItem.setOnClickListener{
+        holder.binding.rowBackground.setOnClickListener{
             val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
