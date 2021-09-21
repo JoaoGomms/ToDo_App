@@ -1,67 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="24dp"
-    tools:context=".fragments.update.UpdateFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="currentItem"
+            type="com.portifolio.todoapp.data.model.TodoEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp"
+        tools:context=".fragments.update.UpdateFragment">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/textTitleInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/custom_input"
-        app:layout_constraintStart_toStartOf="parent"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/textTitleInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/custom_input"
+            app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
 
-            android:id="@+id/textTitleEditText"
-            android:ems="10"
-            android:background="@android:color/transparent"
-            android:layout_width="match_parent"
+                android:id="@+id/textTitleEditText"
+                android:ems="10"
+                android:text="@{currentItem.title}"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:hint="@string/title" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/priorities_spinner"
+            android:layout_width="0dp"
             android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:parsePriorityToInt="@{currentItem.priority}"
+            app:layout_constraintStart_toStartOf="parent"
+            android:entries="@array/priority_array"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:hint="@string/title"/>
+            app:layout_constraintTop_toBottomOf="@+id/textTitleInputLayout" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/priorities_spinner"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/custom_input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:entries="@array/priority_array"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleInputLayout" />
-
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:background="@drawable/custom_input"
-        android:hint="@string/description"
-        android:foregroundGravity="top"
-        android:paddingStart="24dp"
-        android:paddingTop="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priorities_spinner" />
+        <EditText
+            android:id="@+id/descriptionEditText"
+            android:background="@drawable/custom_input"
+            android:hint="@string/description"
+            android:foregroundGravity="top"
+            android:text="@{currentItem.description}"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priorities_spinner" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

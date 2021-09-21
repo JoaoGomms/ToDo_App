@@ -39,9 +39,9 @@ class UpdateFragment : Fragment() {
     }
 
     private fun bindViews() {
-        binding.textTitleEditText.setText(args.currentTodo.title)
-        binding.descriptionEditText.setText(args.currentTodo.description)
-        binding.prioritiesSpinner.setSelection(sharedViewModel.parsePriorityToInt(args.currentTodo.priority))
+
+        binding.currentItem = args.currentTodo
+
         binding.prioritiesSpinner.onItemSelectedListener = sharedViewModel.listener
     }
 
