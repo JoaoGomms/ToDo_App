@@ -47,4 +47,46 @@ class UpdateFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.update_fragment_menu, menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId) {
+            R.id.menu_save -> updateItem()
+            R.id.menu_delete -> deleteItem()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteItem() {
+        todoViewModel.deleteTodo(args.currentTodo)
+
+        Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_SHORT).show()
+
+    }
+
+    private fun updateItem(){
+        val title = binding.textTitleEditText.text.toString()
+        val description = binding.descriptionEditText.text.toString()
+        val priority = binding.prioritiesSpinner.selectedItem.toString()
+
+        val validation = sharedViewModel.verifyDataFromTodo(title, description)
+        if (validation){
+
+            val updateItem = TodoEntity(
+                args.currentTodo.id,
+                title,
+                sharedViewModel.parseStringToPriority(priority),
+                description
+            )
+
+            todoViewModel.updateTodo(updateItem)
+            Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_SHORT).show()
+
+            findNavController().navigate(action)
+        } else {
+            Toast.makeText(requireContext(), "Must fill all fields", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
