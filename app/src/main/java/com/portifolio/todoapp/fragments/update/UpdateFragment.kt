@@ -1,5 +1,6 @@
 package com.portifolio.todoapp.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -52,25 +53,36 @@ class UpdateFragment : Fragment() {
 
         when(item.itemId) {
             R.id.menu_save -> updateItem()
-            R.id.menu_delete -> deleteItem()
+            R.id.menu_delete -> confirmItemRemoval()
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun deleteItem() {
-        todoViewModel.deleteTodo(args.currentTodo)
+    private fun confirmItemRemoval() {
+        val builder = AlertDialog.Builder(requireActivity())
 
-        Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_SHORT).show()
+        builder.setPositiveButton("Yes") { _, _ ->
+            todoViewModel.deleteTodo(args.currentTodo)
+            Toast.makeText(requireContext(), "Successfully remove ${args.currentTodo.title}!", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(action)
+        }
 
+        builder.setNegativeButton("No") { _, _ -> }
+
+        builder.setTitle("Delete ${args.currentTodo.title}?")
+        builder.setMessage("Are you sure you want to remove ${args.currentTodo.title}? This action can't be undone")
+        builder.create().show()
     }
 
     private fun updateItem(){
+
         val title = binding.textTitleEditText.text.toString()
         val description = binding.descriptionEditText.text.toString()
         val priority = binding.prioritiesSpinner.selectedItem.toString()
 
         val validation = sharedViewModel.verifyDataFromTodo(title, description)
+
         if (validation){
 
             val updateItem = TodoEntity(
@@ -81,9 +93,11 @@ class UpdateFragment : Fragment() {
             )
 
             todoViewModel.updateTodo(updateItem)
+
             Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_SHORT).show()
 
             findNavController().navigate(action)
+
         } else {
             Toast.makeText(requireContext(), "Must fill all fields", Toast.LENGTH_SHORT).show()
         }
