@@ -38,14 +38,12 @@ class ListFragment : Fragment() {
         binding.listRecyclerView.adapter = adapter
         binding.listRecyclerView.layoutManager = GridLayoutManager(context, 1)
         handleClicks()
+        binding.lifecycleOwner = this
         todoViewModel.getTodos().observe(viewLifecycleOwner, {
 
                 data ->
             adapter.setData(data)
-            if (data.isEmpty()) {
-                binding.addFirstTextView.visibility = View.VISIBLE
-                binding.addFirstImageView.visibility = View.VISIBLE
-            }
+            binding.emptyDatabaseValue = data.isEmpty()
         })
 
 
@@ -58,18 +56,14 @@ class ListFragment : Fragment() {
 
     private fun handleClicks() {
 
-        binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(toAddFragmentAction)
-        }
-
         binding.addFirstImageView.setOnClickListener {
             findNavController().navigate(toAddFragmentAction)
         }
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
