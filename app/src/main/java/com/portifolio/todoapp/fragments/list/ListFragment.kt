@@ -17,6 +17,7 @@ import com.portifolio.todoapp.data.model.TodoEntity
 import com.portifolio.todoapp.fragments.list.adapter.TodoAdapter
 import com.portifolio.todoapp.databinding.FragmentListBinding
 import com.portifolio.todoapp.fragments.list.util.SwipeToDelete
+import com.portifolio.todoapp.util.hideKeyboard
 import com.portifolio.todoapp.viewmodel.TodoViewModel
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
@@ -57,7 +58,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             binding.emptyDatabaseValue = data.isEmpty()
         })
 
-
+        hideKeyboard(requireActivity())
 
         setHasOptionsMenu(true)
 
