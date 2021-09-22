@@ -3,6 +3,7 @@ package com.portifolio.todoapp.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +21,7 @@ import com.portifolio.todoapp.viewmodel.TodoViewModel
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +32,11 @@ class ListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.list_fragment_menu, menu)
+
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
 
     }
 
@@ -145,4 +151,31 @@ class ListFragment : Fragment() {
         builder.create().show()
 
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null){
+            searchThroughDatabases(query)
+        }
+
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query != null){
+            searchThroughDatabases(query)
+        }
+
+        return true
+    }
+
+    private fun searchThroughDatabases(query: String) {
+        var searchQuery = query
+        searchQuery = "%$searchQuery%"
+
+        todoViewModel.searchDatabase(searchQuery).observe(this){
+            it?.let { adapter.setData(it) }
+        }
+
+    }
+
 }

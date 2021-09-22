@@ -50,5 +50,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun searchDatabase(searchQuery: String): LiveData<List<TodoEntity>>{
+        return repository.searchDatabase(searchQuery)
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.portifolio.todoapp.data.repository
 
+import androidx.lifecycle.LiveData
 import com.portifolio.todoapp.data.dao.TodoDao
 import com.portifolio.todoapp.data.model.TodoEntity
 
@@ -21,6 +22,10 @@ class TodoRepository(private val dao : TodoDao) {
 
     suspend fun deleteAll(){
         dao.deleteAll()
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<TodoEntity>>{
+        return dao.searchDatabase(searchQuery)
     }
 
 
