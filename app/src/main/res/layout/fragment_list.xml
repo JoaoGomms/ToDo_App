@@ -18,6 +18,7 @@
         tools:context=".fragments.list.ListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layoutAnimation="@anim/recyclerview_anim"
             android:id="@+id/listRecyclerView"
             android:layout_width="match_parent"
             android:paddingTop="8dp"

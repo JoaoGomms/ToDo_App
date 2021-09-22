@@ -20,7 +20,6 @@ import com.portifolio.todoapp.fragments.list.util.SwipeToDelete
 import com.portifolio.todoapp.util.hideKeyboard
 import com.portifolio.todoapp.util.observeOnce
 import com.portifolio.todoapp.viewmodel.TodoViewModel
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -29,7 +28,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private val binding get() = _binding!!
     private val adapter: TodoAdapter by lazy { TodoAdapter() }
     private val todoViewModel: TodoViewModel by viewModels()
-    val toAddFragmentAction = ListFragmentDirections.actionListFragmentToAddFragment()
+    private val toAddFragmentAction = ListFragmentDirections.actionListFragmentToAddFragment()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
@@ -57,6 +56,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 data ->
             adapter.setData(data)
             binding.emptyDatabaseValue = data.isEmpty()
+            binding.listRecyclerView.scheduleLayoutAnimation()
+
         })
 
         hideKeyboard(requireActivity())
@@ -72,10 +73,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.itemAnimator = FadeInUpAnimator().apply {
-            addDuration = 100
-            removeDuration = 100
-        }
+
 
 
 
