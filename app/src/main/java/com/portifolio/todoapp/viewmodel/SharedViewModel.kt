@@ -28,9 +28,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     fun verifyDataFromTodo(title: String, description: String): Boolean {
 
-        return if(TextUtils.isEmpty(title) || TextUtils.isEmpty(description)){
-            false
-        } else !(title.isEmpty() || description.isEmpty())
+       return !(title.isEmpty() || description.isEmpty())
 
     }
 
