@@ -2,6 +2,7 @@ package com.portifolio.todoapp.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.portifolio.todoapp.data.model.TodoEntity
 import com.portifolio.todoapp.databinding.ListItemBinding
@@ -31,8 +32,12 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
     override fun getItemCount() = todoList.size
 
     fun setData(newList: List<TodoEntity>){
+
+        val todoDiffUtil = ToDoDiffUtil(todoList, newList)
+        val todoDiffResult = DiffUtil.calculateDiff(todoDiffUtil)
         this.todoList = newList
-        notifyDataSetChanged()
+        todoDiffResult.dispatchUpdatesTo(this)
+
     }
 
 
