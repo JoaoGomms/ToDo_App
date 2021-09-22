@@ -8,7 +8,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -111,19 +110,18 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun swipeToDelete(recyclerView: RecyclerView){
-        val swipteToDeleteCallback = object : SwipeToDelete(){
+        val swipeToDeleteCallback = object : SwipeToDelete(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
                 val deletedItem = adapter.todoList[position]
                 todoViewModel.deleteTodo(deletedItem)
                 adapter.notifyItemRemoved(position)
-                Toast.makeText(requireContext(), "Successfully removed  '${deletedItem.title}'", Toast.LENGTH_SHORT).show()
 
                 restoreDeletedData(viewHolder.itemView, deletedItem, position)
 
             }
         }
-        val itemTouchHelper = ItemTouchHelper(swipteToDeleteCallback)
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
