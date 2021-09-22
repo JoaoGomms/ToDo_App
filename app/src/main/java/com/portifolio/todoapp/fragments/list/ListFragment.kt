@@ -3,8 +3,8 @@ package com.portifolio.todoapp.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -169,8 +169,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchThroughDatabases(query: String) {
-        var searchQuery = query
-        searchQuery = "%$searchQuery%"
+        val searchQuery = "%$query%"
 
         todoViewModel.searchDatabase(searchQuery).observe(this){
             it?.let { adapter.setData(it) }
