@@ -90,7 +90,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     }
 
-    private fun restoreDeletedData(view: View, deletedItem: TodoEntity, position: Int){
+    private fun restoreDeletedData(view: View, deletedItem: TodoEntity){
         val snackBar = Snackbar.make(
             view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG
         )
@@ -116,7 +116,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 todoViewModel.deleteTodo(deletedItem)
                 adapter.notifyItemRemoved(position)
 
-                restoreDeletedData(viewHolder.itemView, deletedItem, position)
+                restoreDeletedData(viewHolder.itemView, deletedItem)
 
             }
         }
