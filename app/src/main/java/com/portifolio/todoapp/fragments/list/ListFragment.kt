@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.portifolio.todoapp.R
 import com.portifolio.todoapp.data.model.TodoEntity
@@ -69,7 +70,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.listRecyclerView
 
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.itemAnimator = FadeInUpAnimator().apply {
             addDuration = 100
             removeDuration = 100
