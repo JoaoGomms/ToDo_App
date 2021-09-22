@@ -7,6 +7,8 @@ import com.portifolio.todoapp.data.model.TodoEntity
 class TodoRepository(private val dao : TodoDao) {
 
     val todos = dao.getAllTodos()
+    val sortByHighPriority = dao.sortByHighPriority()
+    val sortByLowPriority = dao.sortByLowPriority()
 
     suspend fun insert(todo: TodoEntity) {
         dao.insertTodo(todo)

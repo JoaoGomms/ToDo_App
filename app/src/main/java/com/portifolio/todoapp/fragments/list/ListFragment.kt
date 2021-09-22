@@ -71,8 +71,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.itemAnimator = FadeInUpAnimator().apply {
-            addDuration = 300
-            removeDuration = 300
+            addDuration = 100
+            removeDuration = 100
         }
 
 
@@ -130,6 +130,18 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         when (item.itemId) {
             R.id.menu_delete_all -> confirmeDeleteAll()
+            R.id.menu_priority_high -> {
+                todoViewModel.getSortByHighPriority().observe(viewLifecycleOwner, { data ->
+                    adapter.setData(data)
+                    binding.emptyDatabaseValue = data.isEmpty()
+                })
+            }
+            R.id.menu_priority_low -> {
+                todoViewModel.getSortByLowPriority().observe(viewLifecycleOwner, { data ->
+                    adapter.setData(data)
+                    binding.emptyDatabaseValue = data.isEmpty()
+                })
+            }
         }
 
         return super.onOptionsItemSelected(item)

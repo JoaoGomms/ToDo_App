@@ -13,15 +13,21 @@ import kotlinx.coroutines.launch
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val todos: LiveData<List<TodoEntity>>
+    private val sortByHighPriority: LiveData<List<TodoEntity>>
+    private val sortByLowPriority: LiveData<List<TodoEntity>>
 
     private val repository: TodoRepository
 
     fun getTodos() = todos
+    fun getSortByHighPriority() = sortByHighPriority
+    fun getSortByLowPriority() = sortByLowPriority
 
     init {
         val todoDao = AppDatabase.getDatabaseInstance(application).todoDao()
         repository = TodoRepository(todoDao)
         todos = repository.todos
+        sortByHighPriority = repository.sortByHighPriority
+        sortByLowPriority = repository.sortByLowPriority
     }
 
     fun deleteAll(){
