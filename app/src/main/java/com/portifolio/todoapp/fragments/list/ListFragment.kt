@@ -17,6 +17,7 @@ import com.portifolio.todoapp.fragments.list.adapter.TodoAdapter
 import com.portifolio.todoapp.databinding.FragmentListBinding
 import com.portifolio.todoapp.fragments.list.util.SwipeToDelete
 import com.portifolio.todoapp.viewmodel.TodoViewModel
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
 
 class ListFragment : Fragment() {
@@ -63,6 +64,12 @@ class ListFragment : Fragment() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.itemAnimator = FadeInUpAnimator().apply {
+            addDuration = 300
+            removeDuration = 300
+        }
+
+
 
         swipeToDelete(recyclerView)
 
